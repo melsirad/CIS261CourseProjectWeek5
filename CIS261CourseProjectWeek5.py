@@ -12,6 +12,7 @@ def GetDatesWorked():
     return fromdate, enddate
     
 def GetHoursWorked():
+
     hours = float(input('Enter amount of hours worked:  '))
     return hours
 def GetHourlyRate():
@@ -46,7 +47,17 @@ def printinfo(EmpDetailList):
 
 
         grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
-        print(fromdate, todate, empname, f"{hours:,.2f}",  f"{hourlyrate:,.2f}", f"{grosspay:,.2f}",  f"{taxrate:,.1%}",  f"{incometax:,.2f}",  f"{netpay:,.2f}")
+        print("Name: ", empname)
+        print("From date:  ", fromdate)
+        print("To date:  ", enddate)
+        print("Hours Worked:  ", f"{hours:,.2f}")
+        print("Hourly Rate:  ", f"{hourlyrate:,.2f}")
+        print("Gross Pay:  ", f"{grosspay:,.2f}" )
+        print("Tax rate:  ", f"{taxrate:,.1%}" )
+        print("Income tax:  ", f"{incometax:,.2f}")
+        print("Net Pay:  ", f"{netpay:,.2f}")
+        print()
+
         TotEmployees += 1
         TotHours += hours
         TotGrossPay += grosspay
@@ -71,10 +82,10 @@ def printinfo(EmpDetailList):
 def PrintTotals(EmpTotals):    
     print()
     print(f'Total Number Of Employees: {EmpTotals["TotEmp"]}')
-    print(f'Total Hours Of Employees: {EmpTotals["TotHours"]}')
-    print(f'Total Gross Pay Of Employees: {EmpTotals["TotGross"]}')
-    print(f'Total Tax Of Employees: {EmpTotals["TotTax"]}')
-    print(f'Total Net Pay Of Employees: {EmpTotals["TotNet"]}')
+    print(f'Total Hours Of Employees: {EmpTotals["TotHours"]:,.2f}')
+    print(f'Total Gross Pay Of Employees: {EmpTotals["TotGross"]:,.2f}')
+    print(f'Total Tax Of Employees: {EmpTotals["TotTax"]:,.2f}')
+    print(f'Total Net Pay Of Employees: {EmpTotals["TotNet"]:,.2f}')
 
 
 
@@ -90,14 +101,14 @@ if __name__ == "__main__":
         empname = GetEmpName()
         if (empname.upper() == "END"):
             break
-        fromdate, todate = GetDatesWorked()
+        fromdate, enddate = GetDatesWorked()
         hours = GetHoursWorked()
         hourlyrate = GetHourlyRate()
         taxrate = GetTaxRate()
         #grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
         #printinfo(empname, hours, hourlyrate, grosspay, taxrate, incometax, netpay)
 
-        EmpDetail = [fromdate, enddate, empname, hours, hourrate, taxrate]
+        EmpDetail = [fromdate, enddate, empname, hours, hourlyrate, taxrate]
         EmpDetailList.append(EmpDetail)
 
         #TotEmployees += 1
@@ -105,6 +116,7 @@ if __name__ == "__main__":
         #TotGrossPay += grosspay
         #TotTax += incometax
         #TotNetPay += netpay
-
+    print()
     printinfo(EmpDetailList)
+    print()
     PrintTotals(EmpTotals)
